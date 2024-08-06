@@ -46,7 +46,7 @@ export const shared = defineConfig({
   ],
 
     themeConfig: {
-        logo: { src: "/vitepress-logo-mini.svg", width: 24, height: 24 },
+        logo: { src: "/user.jpg", width: 24, height: 24, style: "border-radius: 50%" },
 
         socialLinks: [
             { icon: "github", link: "https://github.com/vuejs/vitepress" },

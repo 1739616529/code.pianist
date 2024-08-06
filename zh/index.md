@@ -2,7 +2,7 @@
 layout: home
 
 title: Code Pianist
-titleTemplate: 由 Vite 和 Vue 驱动的静态站点生成器
+titleTemplate: 记录个人笔记
 
 hero:
     name: Code Pianist
@@ -34,29 +34,3 @@ features:
       title: 最常用的 web 框架 vue
       details: 熟练使用 vue 生态构建健壮的web应用
 ---
-
-<style>
-:root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
-
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
-  --vp-home-hero-image-filter: blur(44px);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
-}
-
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(68px);
-  }
-}
-img[alt="Code Pianist"] {
-    border-radius: 50%;
-    overflow: hidden;
-}
-</style>
