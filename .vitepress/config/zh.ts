@@ -99,6 +99,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: "类名", link: "/class" },
             ],
         },
+        {
+            text: "Git",
+            collapsed: false,
+            base: "/zh/guide/git",
+            items: [
+                { text: "commit", link: "/commit" },
+            ],
+        },
+
     ];
 }
 
