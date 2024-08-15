@@ -34,7 +34,7 @@ jobs:
               run: pnpm run build
 
             - name: create dist zip
-              run: tar cxzf dist.gar.xz ./vitepress/dist/*
+              run: tar cvzf  dist.gar.xz ./vitepress/dist/*
 
             - uses: googleapis/release-please-action@v4
               id: release
