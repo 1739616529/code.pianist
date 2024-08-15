@@ -107,6 +107,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: "commit", link: "/commit" },
             ],
         },
+        {
+            text: "Github",
+            collapsed: false,
+            base: "/zh/guide/github",
+            items: [
+                { text: "Actions", link: "/actions" },
+            ],
+        },
 
     ];
 }
