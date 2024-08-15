@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/1739616529/code.pianist/compare/code.pianist-v1.0.0...code.pianist-v1.1.0) (2024-08-15)
+
+
+### Features
+
+* add github actions page ([faab752](https://github.com/1739616529/code.pianist/commit/faab7520155c615992d1a409269b9b8d41064e42))
+
 ## 1.0.0 (2024-08-15)
 
 
