@@ -149,4 +149,5 @@ Add words to .vscode/settings.json(Spell.words)
 - tailwindcss
 
 Closes #234
+
 ```
