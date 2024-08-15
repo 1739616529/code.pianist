@@ -47,6 +47,6 @@ jobs:
               uses: actions/upload-release-asset@v1
               with:
                   upload_url: ${{ steps.release.outputs.upload_url }}
-                  asset_path: dist.tar.xz
-                  asset_name: your_binary_windows.exe
+                  asset_path: ./dist.tar.xz
+                  asset_name: dist.tar.xz
                   asset_content_type: application/octet-stream
