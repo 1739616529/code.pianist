@@ -39,12 +39,14 @@ jobs:
             - name: Release Please Results
               env:
                   RESULTS: ${{ toJSON(steps.release.outputs) }}
-              run: echo "$RESULTS"
+              run: |
+                echo "$RESULTS">a.txt
 
             - name: Upload Release Asset file
               uses: softprops/action-gh-release@v2
               with:
                   files: |
                     dist.tar.xz
+                    a.txt
                   tag_name: v1.0
 
