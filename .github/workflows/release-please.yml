@@ -46,4 +46,5 @@ jobs:
               with:
                   files: |
                     dist.tar.xz
+                  tag_name: v1.0
 
