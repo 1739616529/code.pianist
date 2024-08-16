@@ -25,6 +25,8 @@ jobs:
               run: npm i -g pnpm
             - run: pnpm i
 
+
+
             - name: build
               run: pnpm run build
 
