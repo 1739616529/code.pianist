@@ -3,6 +3,8 @@ name: release-please
 on:
     push:
         branches: ["main"]
+    pull_request:
+        branches: ["main"]
 
 jobs:
     release-please:
@@ -25,8 +27,6 @@ jobs:
               run: npm i -g pnpm
             - run: pnpm i
 
-
-
             - name: build
               run: pnpm run build
 
@@ -41,14 +41,14 @@ jobs:
             - name: Release Please Results
               env:
                   RESULTS: ${{ toJSON(steps.release.outputs) }}
-              run: |
-                echo "$RESULTS">a.txt
+              run: echo "$RESULTS"
 
             - name: Upload Release Asset file
-              uses: softprops/action-gh-release@v2
+              uses: actions/upload-release-asset@v1
+              if: ${{ steps.release.outputs.release_created }}
               with:
-                  files: |
-                    dist.tar.xz
-                    a.txt
-                  tag_name: v1.0
+                  upload_url: ${{ steps.release.outputs.upload_url }}
+                  asset_path: ./dist.tar.xz
+                  asset_name: dist.tar.xz
+                  asset_content_type: application/octet-stream
 
