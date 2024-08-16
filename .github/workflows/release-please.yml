@@ -14,59 +14,39 @@ jobs:
         runs-on: ubuntu-latest
         steps:
 
+            - name: Checkout repository
+              uses: actions/checkout@v4.1.6
 
-            - name: release
-              id: release
-              uses: actions/create-release@v1
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
               with:
-                tag_name: main
-                release_name: Release main
-                body: |
-                  Changes in this Release
-                  - First Change
-                  - Second Change
-                draft: false
-                prerelease: false
+                  node-version: "20"
 
+            - name: Install dependencies
+              run: npm i -g pnpm
+            - run: pnpm i
 
-            # - name: Checkout repository
-            #   uses: actions/checkout@v4.1.6
+            - name: build
+              run: pnpm run build
 
+            - name: create dist zip
+              run: tar cvzf  dist.tar.xz .vitepress/dist/
 
-            # - name: Set up Node.js
-            #   uses: actions/setup-node@v2
-            #   with:
-            #       node-version: "20"
-
-            # - name: log pwd file list
-            #   run: ls -l -a
-
-            # - name: Install dependencies
-            #   run: npm i -g pnpm
-            # - run: pnpm i
-
-            # - name: build
-            #   run: pnpm run build
-
-            # - name: create dist zip
-            #   run: tar cvzf  dist.tar.xz .vitepress/dist/
-
-            # - uses: googleapis/release-please-action@v4
-            #   id: release
-            #   with:
-            #       token: ${{ secrets.ACTIOPNS_TOKEN }}
+            - uses: googleapis/release-please-action@v4
+              id: release
+              with:
+                  token: ${{ secrets.ACTIOPNS_TOKEN }}
 
             - name: Release Please Results
               env:
                   RESULTS: ${{ toJSON(steps.release.outputs) }}
               run: echo "$RESULTS"
 
-            # - name: Upload Release Asset file
-            #   uses: actions/upload-release-asset@v1
-            #   with:
-            #       upload_url: ${{ steps.release.outputs.upload_url }}
-            #       asset_path: ./dist.tar.xz
-            #       asset_name: dist.tar.xz
-            #       asset_content_type: application/octet-stream
+            - name: Upload Release Asset file
+              uses: actions/upload-release-asset@v1
+              with:
+                  upload_url: ${{ steps.release.outputs.upload_url }}
+                  asset_path: ./dist.tar.xz
+                  asset_name: dist.tar.xz
+                  asset_content_type: application/octet-stream
