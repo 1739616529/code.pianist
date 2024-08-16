@@ -36,7 +36,7 @@ jobs:
             - name: create dist zip
               run: tar cvzf  dist.tar.xz .vitepress/dist/
 
-            - uses: googleapis/release-please-action@v4
+            - uses: googleapis/release-please-action@v2
               id: release
               with:
                   token: ${{ secrets.ACTIOPNS_TOKEN }}
