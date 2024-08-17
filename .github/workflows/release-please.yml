@@ -27,5 +27,5 @@ jobs:
 
             - name: build
               if: ${{ steps.release.outputs.release_created }}
-              uses: ./.github/actions/build.yml
+              uses: ./.github/actions/build
 
