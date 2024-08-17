@@ -10,6 +10,9 @@ jobs:
             id-token: write
             contents: write
         runs-on: ubuntu-latest
+        outputs:
+            release_created: ${{ steps.release.outputs.release_created }}
+            upload_url: ${{ steps.release.outputs.upload_url }}
         steps:
 
             - name: Checkout repository
@@ -25,12 +28,46 @@ jobs:
                   RESULTS: ${{ toJSON(steps.release.outputs) }}
               run: echo "$RESULTS"
 
-            # - name: build
-            #   if: ${{ steps.release.outputs.release_created }}
-            #   uses: ./.github/actions/build
 
-            - name: upload file
-              uses: ./.github/actions/upload
-              if: ${{ steps.release.outputs.release_created }}
+    build:
+        needs: release-please
+        if: ${{ needs.release-please.outputs.release_created }}
+        permissions:
+            id-token: write
+            contents: write
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4.1.6
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
               with:
-                upload_url: ${{ steps.release.outputs.upload_url }}
+                  node-version: "20"
+
+            - name: Install dependencies
+              run: npm i -g pnpm
+            - run: pnpm i
+
+            - name: build
+              run: pnpm run build
+
+
+
+    upload-dist:
+        needs: [build, release-please]
+        if: ${{ needs.release-please.outputs.release_created }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: create dist zip
+              run: tar cvzf  dist.tar.xz package.json
+
+            - name: Upload Release Asset file
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.ACTIOPNS_TOKEN }}
+              with:
+                  upload_url: ${{ needs.release-please.outputs.upload_url }}
+                  asset_path: ./dist.tar.xz
+                  asset_name: dist.tar.xz
+                  asset_content_type: application/octet-stream
