@@ -18,6 +18,11 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4.1.6
 
+            - name: log ls
+              run: |
+                pwd
+                ls -l
+
             - uses: googleapis/release-please-action@v4
               id: release
               with:
@@ -37,9 +42,18 @@ jobs:
             contents: write
         runs-on: ubuntu-latest
         steps:
+
+            - name: log ls
+              run: |
+                pwd
+                ls -l
             - name: Checkout repository
               uses: actions/checkout@v4.1.6
 
+            - name: log ls
+              run: |
+                pwd
+                ls -l
             - name: Set up Node.js
               uses: actions/setup-node@v2
               with:
@@ -59,6 +73,10 @@ jobs:
         if: ${{ needs.release-please.outputs.release_created }}
         runs-on: ubuntu-latest
         steps:
+            - name: log ls
+              run: |
+                pwd
+                ls -l
             - name: create dist zip
               run: tar cvzf  dist.tar.xz package.json
 
