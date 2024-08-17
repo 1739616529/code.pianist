@@ -82,7 +82,7 @@ jobs:
                 pwd
                 ls -l
             - name: create dist zip
-              run: tar cvzf  dist.tar.xz package.json
+              run: tar cvzf  dist.tar.xz CHANGELOG.md
 
             - name: Upload Release Asset file
               uses: actions/upload-release-asset@v1
