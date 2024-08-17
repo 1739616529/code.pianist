@@ -30,6 +30,7 @@ jobs:
               run: echo "$RESULTS"
 
 
+
     build:
         needs: release-please
         if: ${{ needs.release-please.outputs.release_created }}
@@ -42,8 +43,6 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4.1.6
 
-            - name: test file
-              run: echo "test.txt">a.txt
             - name: Set up Node.js
               uses: actions/setup-node@v2
               with:
@@ -56,21 +55,6 @@ jobs:
             - name: build
               run: pnpm run build
 
-
-
-    upload-dist:
-        needs: [build, release-please]
-        if: ${{ needs.release-please.outputs.release_created }}
-        runs-on: ubuntu-latest
-        steps:
-
-            - name: Checkout repository
-              uses: actions/checkout@v4.1.6
-
-            - name: log ls
-              run: |
-                pwd
-                ls -l
             - name: create dist zip
               run: tar cvzf  dist.tar.xz CHANGELOG.md
 
@@ -83,3 +67,6 @@ jobs:
                   asset_path: ./dist.tar.xz
                   asset_name: dist.tar.xz
                   asset_content_type: application/octet-stream
+
+
+
