@@ -10,8 +10,6 @@ jobs:
             id-token: write
             contents: write
         runs-on: ubuntu-latest
-        outputs:
-            outputs: ${{ steps.release.outputs }}
         steps:
 
             - name: Checkout repository
@@ -28,7 +26,7 @@ jobs:
               run: echo "$RESULTS"
 
             - name: build
-              if: ${{ steps.release.outputs.release_created }}
+            #   if: ${{ steps.release.outputs.release_created }}
               uses: ./.github/actions/build
 
             - name: Release Please Results
