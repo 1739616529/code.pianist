@@ -73,6 +73,10 @@ jobs:
         if: ${{ needs.release-please.outputs.release_created }}
         runs-on: ubuntu-latest
         steps:
+
+            - name: Checkout repository
+              uses: actions/checkout@v4.1.6
+
             - name: log ls
               run: |
                 pwd
