@@ -8,24 +8,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
 
-            - name: print release-please output
-              run: echo "${{ toJSON(job.release-please.outputs) }}"
+            - name: Checkout repository
+              uses: actions/checkout@v4.1.6
 
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20"
 
-            # - name: Checkout repository
-            #   uses: actions/checkout@v4.1.6
+            - name: Install dependencies
+              run: npm i -g pnpm
+            - run: pnpm i
 
-            # - name: Set up Node.js
-            #   uses: actions/setup-node@v2
-            #   with:
-            #       node-version: "20"
-
-            # - name: Install dependencies
-            #   run: npm i -g pnpm
-            # - run: pnpm i
-
-            # - name: build
-            #   run: pnpm run build
+            - name: build
+              run: pnpm run build
 
 
 
