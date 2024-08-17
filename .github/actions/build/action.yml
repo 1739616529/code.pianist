@@ -9,7 +9,7 @@ jobs:
         steps:
 
             - name: print release-please output
-              run: echo "${{ toJSON(jobs.release-please.outputs) }}"
+              run: echo "${{ toJSON(job.release-please.outputs) }}"
 
 
             # - name: Checkout repository
