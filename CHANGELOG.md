@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/1739616529/code.pianist/compare/code.pianist-v1.10.0...code.pianist-v1.11.0) (2024-08-17)
+
+
+### Features
+
+* 3 ([43b3c3f](https://github.com/1739616529/code.pianist/commit/43b3c3fef2028227d85ba28cbfd5c6e425dde64c))
+
 ## [1.10.0](https://github.com/1739616529/code.pianist/compare/code.pianist-v1.9.0...code.pianist-v1.10.0) (2024-08-17)
 
 
