@@ -2,11 +2,16 @@ name: build
 
 jobs:
     release-please:
+         needs: [release-please]
         permissions:
             id-token: write
             contents: write
         runs-on: ubuntu-latest
         steps:
+
+            - name: print release-please output
+              run: echo "${{ toJSON(needs.release-please.outputs) }}"
+
 
             - name: Checkout repository
               uses: actions/checkout@v4.1.6
@@ -26,20 +31,4 @@ jobs:
             - name: create dist zip
               run: tar cvzf  dist.tar.xz .vitepress/dist/
 
-
-            - name: Release Please Results
-              env:
-                  RESULTS: ${{ toJSON(steps.release.outputs) }}
-              run: echo "$RESULTS"
-
-            - name: Upload Release Asset file
-              uses: actions/upload-release-asset@v1
-              if: ${{ steps.release.outputs.release_created }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.ACTIOPNS_TOKEN }}
-              with:
-                  upload_url: ${{ steps.release.outputs.upload_url }}
-                  asset_path: ./dist.tar.xz
-                  asset_name: dist.tar.xz
-                  asset_content_type: application/octet-stream
 
